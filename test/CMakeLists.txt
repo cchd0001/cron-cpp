@@ -44,7 +44,7 @@ else()
         )
     
     target_link_libraries(Test
-        boost_system
+        Boost::system
         boost_date_time
         UnitTest++
         CppCron

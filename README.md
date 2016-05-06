@@ -4,7 +4,7 @@
 
 This is a cron libriary write by c++ .
 
-###Support Format : 
+### Support Format : 
 
 ```
 ┌─────────────sec ( 0 - 59 ) 
@@ -27,9 +27,6 @@ This is a cron libriary write by c++ .
 | Month |	Yes |	1-12 or JAN-DEC |	* , - ?	|
 |Day of week| 	No | 	0-6 or SUN-SAT | 	* , - ? |
 
-### Used 3rd libriary
-1. boost 
-2. UnitTest++  ( only if you want to compiler test code ) 
 
 ### Basic usage
 #### Basic defines
@@ -60,25 +57,59 @@ enum CronLogLevel {
 typedef std::function<void( CronLogLevel lev ,  const std::string & string)> CronLogger;
 ```
 *  Cron manager class ```Cron``` .
-#### Interfaces
+### Interfaces ( all below to class ```Cron::Cron``` ) .
 
-*  Cron construct  :  ```Cron(IOService & s ,  CronLogger l) ```
+*  Cron construct  : 
   1.  ```Cron``` doesn't manager ```IOService``` .
   2.  ```Cron``` and all jobs that ```Cron``` manager are running on this ```IOService``` .
 
-* Cron start  : ``` void Start()``` .
-* Cron stop : ```void Stop()``` .
+```c++ 
+Cron(IOService & s ,  CronLogger l)
+```
+
+
+* Cron start  :
+
+```c++
+void Start();
+``` 
+
+* Cron stop : 
   1. ```Stop``` interface will top ```Cron``` . No more jobs will triggered .
   2. Jobs that already triggered will not be stoped .
-* Add a job into cron ```int AddJob(const std::string & pattern , Job j);```
+
+```c++
+void Stop();
+``` 
+
+* Add a job into cron
   1. ```AddJob``` is thread-safe inteface .
   2. you can call ```AddJob``` anytime .
   3. return ```int``` is a handler of this job, use it to remove this job . 
-* Remove a specific job : ```void RemoveJob(int id)``` .
+  
+
+```c++
+int AddJob(const std::string & pattern , Job j);
+```
+
+* Remove a specific job :.
   1 ```RemoveJob``` is thread-safe inteface .
   2. you can call ```RemoveJob``` anytime .
+  
+
+  
+```c++
+void RemoveJob(int id)
+``` 
 
 ### Example
+
+### Used 3rd libriary
+1. boost 
+2. UnitTest++  ( only if you want to compiler test code ) 
+### Support platform 
+
+Any platform that CMake support and if you want to edit CMakeLists.txt for it.
 
 ## Why does I write this ?  
 

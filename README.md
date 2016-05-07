@@ -57,7 +57,7 @@ enum CronLogLevel {
 typedef std::function<void( CronLogLevel lev ,  const std::string & string)> CronLogger;
 ```
 *  Cron manager class ```Cron``` .
-### Interfaces ( all below to class ```Cron::Cron``` ) .
+### Interfaces ( all interfaces are members of class ```Cron::Cron``` ) .
 
 *  Cron construct  : 
   1.  ```Cron``` doesn't manager ```IOService``` .
@@ -103,6 +103,25 @@ void RemoveJob(int id)
 ``` 
 
 ### Example
+
+```c++
+#include "cron.h"
+#include <thread>
+#include <iostream>
+int main() {
+    Cron::IOService ios;
+    Cron::Cron cron(ios, [](Cron::CronLogLevel lev , const std::string & log) {
+      std::cout<<"Log lev : "<<lev<<" -- log message : "<<log<<std::endl;
+    });
+    cron.AddJob("* * * * *" , []() {
+      std::cout<<"Hello worLd"<<std::endl;
+    });
+    cron.Start();
+    ios.run();
+    return 0 ;
+}
+
+```
 
 ### Used 3rd libriary
 1. boost 

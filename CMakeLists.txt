@@ -22,14 +22,17 @@ set(CRON_INCS  cron.h
     cron_spec.h
     StringFunc.h
     cron_boost.h
+    cron_const.h
 )
 
 set(CRON_SRCS  cron.cpp
     cron_err.cpp
     cron_parser.cpp
     cron_spec.cpp
+    cron_const.cpp
 )
 
 add_library(CppCron STATIC ${CRON_SRCS} ${CRON_INCS})
 
 add_subdirectory(test)
+add_subdirectory(example)

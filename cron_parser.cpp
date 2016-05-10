@@ -3,10 +3,11 @@
 #include "cron_err.h"
 #include "cron_parser.h"
 #include "cron_spec.h"
+#include "cron_const.h"
 #include "StringFunc.h"
 
 #include <vector>
-
+#include <cstring>
 namespace Cron {
 
 	TimeItem bounds::GetField(const std::string & str) const {
@@ -190,9 +191,14 @@ namespace Cron {
 			ret->m_mon = months.All();
 			ret->m_dow = dow.All();
 		}
-		else {
-			ret = nullptr;
-		}
+		else if (strstr(str.c_str() , "@every ") == str.c_str() ) {
+            auto fileds = Fields(str) ;
+            if( fileds.size() >= 2 ){
+			    return Every(fileds[1]);
+            }
+		} else {
+            ret = nullptr;
+        }
 		return ret;
 	}
 

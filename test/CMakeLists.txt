@@ -7,6 +7,7 @@ add_executable(Test test.cpp
     cron_parser_test.cpp
     cron_spec_test.cpp
     cron_test.cpp
+    cron_const_test.cpp
     )
 
 if(WIN32)

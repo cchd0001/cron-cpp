@@ -12,6 +12,8 @@ namespace Cron {
 
     typedef boost::asio::deadline_timer Timer;
     
+    typedef boost::posix_time::time_duration Duration;
+
     inline TimePoint getTime(const std::string & value){
         return TimePoint(boost::posix_time::time_from_string(value));
     }
@@ -28,6 +30,8 @@ namespace Cron {
 #define CRON_MINUTES(x)     ( boost::posix_time::minutes((x)) )
 
 #define CRON_SECONDS(x)     ( boost::posix_time::seconds((x)) ) 
+
+#define CRON_NAOSECONDS(x)     ( boost::posix_time::nanoseconds((x)) ) 
 
 // TimePoint to std::tm
 #define CRON_TO_TM(x)       ( boost::posix_time::to_tm(x) )

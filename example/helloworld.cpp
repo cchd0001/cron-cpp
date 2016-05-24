@@ -6,7 +6,7 @@ int main() {
     Cron::Cron cron(ios, [](Cron::CronLogLevel lev , const std::string & log) {
       std::cout<<"Log lev : "<<lev<<" -- log message : "<<log<<std::endl;
     });
-    cron.AddJob("* * * * *" , []() {
+    cron.AddJob("1 5/10 * * *" , []() {
       std::cout<<"Hello worLd"<<std::endl;
     });
     cron.Start();

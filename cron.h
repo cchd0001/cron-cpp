@@ -14,7 +14,7 @@ namespace Cron{
 
             virtual ~ISchedule() {}
 
-            virtual TimePoint Next(const TimePoint & now) const = 0 ;    
+            virtual TimePoint Next(const TimePoint & now) const = 0 ; 
     };
 
     typedef std::shared_ptr<ISchedule>  ISchedulePtr;
@@ -39,7 +39,7 @@ namespace Cron{
         TimePoint prev;
 
         Job job;
-      
+
 		bool Valid() const { return nullptr != schedule ; }
 
 		void Next(const TimePoint now) {
@@ -67,6 +67,8 @@ namespace Cron{
 			static const int InvalidID = -1; 
 
             Cron(IOService & s ,  CronLogger l) ;
+
+            Cron(IOService & s ,  CronLogger l , int  seconds) ;
 			// Start all tasks .
             void Start();
 			// Stop all tasks . Already started jobs will not effected .
@@ -79,6 +81,8 @@ namespace Cron{
         private:
 
             void run_nolock() ;
+            
+            void start_nolock() ;
 
             void stop_nolock() ;
             // Sort task list
@@ -88,6 +92,10 @@ namespace Cron{
 			// Post a job . Will catch all exception and report it. 
             void runjob_nolock(Job j , int id);
 
+            void start_clock_check_nolock() ;
+
+            void stop_clock_check_nolock();
+
             std::mutex m_mutex;
 
             std::vector<Entry> m_lists;
@@ -96,11 +104,17 @@ namespace Cron{
 
             Timer m_timer;
 
+            Timer m_clock_checker;
+
             CronLogger m_logger;
+
+            TimePoint m_clock_time;
 
             bool m_running;
 
             int m_index ;
+
+            int m_check_seconds;
     };
 
 } //namespace Cron 

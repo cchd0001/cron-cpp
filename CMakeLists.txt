@@ -8,14 +8,21 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/boost.cmake )
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/unittest++.cmake ) 
 
 # compile options
-add_definitions(
-    -g
-    -std=c++11
-    -Wall
-)
+if(WIN32)
+    add_definitions(
+        /Od
+        /Mtd
+        /Wall
+    )
+else()
+    add_definitions( 
+        -g
+        -std=c++11
+        -Wall
+    )
+endif()
 
 project(Cron)
-
 set(CRON_INCS  cron.h
     cron_err.h
     cron_parser.h
@@ -24,7 +31,6 @@ set(CRON_INCS  cron.h
     cron_boost.h
     cron_const.h
 )
-
 set(CRON_SRCS  cron.cpp
     cron_err.cpp
     cron_parser.cpp

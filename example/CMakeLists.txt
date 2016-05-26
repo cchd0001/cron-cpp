@@ -35,6 +35,7 @@ else()
     target_link_libraries(Example
         boost_system
         boost_date_time
+        boost_chrono
         CppCron
         pthread
         )

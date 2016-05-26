@@ -104,7 +104,7 @@ namespace Cron{
 
             Timer m_timer;
 
-            Timer m_clock_checker;
+            CpuTimer m_clock_checker;
 
             CronLogger m_logger;
 

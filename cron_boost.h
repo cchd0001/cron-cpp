@@ -2,6 +2,7 @@
 #define __CRON_CRON_BOOST_H__
 
 #include "boost/date_time/posix_time/posix_time.hpp"
+#include "boost/chrono/process_cpu_clocks.hpp"
 #include <boost/asio.hpp>
 
 namespace Cron {
@@ -11,7 +12,11 @@ namespace Cron {
     typedef boost::asio::io_service IOService;
 
     typedef boost::asio::deadline_timer Timer;
-    
+
+    typedef boost::asio::basic_waitable_timer<boost::chrono::process_real_cpu_clock>  CpuTimer;
+
+    typedef boost::asio::deadline_timer Timer;
+
     typedef boost::posix_time::time_duration Duration;
 
     inline TimePoint getTime(const std::string & value){
@@ -30,6 +35,8 @@ namespace Cron {
 #define CRON_MINUTES(x)     ( boost::posix_time::minutes((x)) )
 
 #define CRON_SECONDS(x)     ( boost::posix_time::seconds((x)) ) 
+
+#define CRON_CHRONO_SECONDS(x)     ( boost::chrono::seconds((x)) ) 
 
 #define CRON_NAOSECONDS(x)     ( boost::posix_time::nanoseconds((x)) ) 
 

@@ -27,6 +27,15 @@ This is a cron libriary write by c++ .
 | Month |	Yes |	1-12 or JAN-DEC |	* , - ?	|
 |Day of week| 	No | 	0-6 or SUN-SAT | 	* , - ? |
 
+#### Special pre-defines
+```
+"@yearly" or "@annually"
+"@monthly"
+"@weekly"
+"@daily" or "@midnight"
+"@hourly"
+"@every hh:mm:ss"
+```
 
 ### Basic usage
 #### Basic defines
